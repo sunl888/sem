@@ -86,4 +86,15 @@ class Navigation
             return collect();
         }
     }
+
+    public function getChildsByParentNavId($category)
+    {
+        $category = $this->getAllNav()->where('cate_name', $category)->first();
+        if (!is_null($category)) {
+            return $category->children;
+        } else {
+            return collect();
+        }
+    }
+
 }

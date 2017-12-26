@@ -5,13 +5,14 @@ namespace App\Models;
 use App\Models\Presenter\PostPresenter;
 use App\Models\Traits\HasSlug;
 use App\Models\Traits\Listable;
+use App\Models\Traits\Sortable;
 use App\Support\Presenter\PresentableInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Post extends BaseModel implements PresentableInterface
 {
-    use SoftDeletes, Listable, HasSlug;
+    use SoftDeletes, Listable, HasSlug, Sortable;
 
     protected $fillable = ['title', 'user_id', 'slug', 'excerpt', 'type', 'views_count', 'cover', 'status', 'template', 'top', 'top_expired_at', 'published_at', 'category_id', 'order', 'fields'];
     protected $dates = ['deleted_at', 'top', 'top_expired_at', 'published_at', 'created_at', 'updated_at'];
@@ -58,6 +59,17 @@ class Post extends BaseModel implements PresentableInterface
         }
         if ($category)
             $query->where('category_id', $category);
+    }
+
+    /**
+     * cover 不为空的文章
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeByNewImgPost($query)
+    {
+        return $query->whereNotNull('cover');
     }
 
 

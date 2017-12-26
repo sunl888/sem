@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Widgets;
 
 use App\Models\Category;
@@ -9,13 +8,12 @@ use App\Repositories\CategoryRepository;
 use App\Support\Widget\AbstractWidget;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class PostList extends AbstractWidget
+class NewImgPost extends AbstractWidget
 {
 
     protected $config = [
         'category' => null,
         'limit' => 10,
-        'page' => 1,
         'status' => Post::STATUS_PUBLISH,
         'view' => ''
     ];
@@ -35,19 +33,19 @@ class PostList extends AbstractWidget
             } catch (ModelNotFoundException $e) {
                 $category = new Category(['cate_name' => $this->config['category']]);
             }
-
         }
         if ($category->exists) {
-            $posts = Post::applyFilter(collect([
+            $post = Post::applyFilter(collect([
                 'category_id' => $category->id,
                 'status' => $this->config['status']
-            ]))->paginate($this->config['limit'], $columns = ['*'], $pageName = 'page', $this->config['page']);
+            ]))->byNewImgPost()->ordered()->first();
         } else {
-            $posts = collect();
+            $post = collect();
         }
+
         return [
             'category' => $category,
-            'posts' => $posts,
+            'post' => $post,
         ];
     }
 
