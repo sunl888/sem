@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    @include('sem.layouts.particals.splitter');
+    @include('sem.layouts.particals.splitter')
 
     <!-- 其他列表 -->
     <div class="other_list">
