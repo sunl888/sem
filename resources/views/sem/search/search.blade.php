@@ -17,7 +17,15 @@
     <div class="list_content">
         <div class="container">
             <!-- 侧边导航栏 -->
-            @widget('navigation_bar', ['view' => 'navigation_bars.side_nav'])
+            <div class="left_nav col-lg-3 col-md-3">
+                <ul>
+                    <li class="active">
+                        <span class="pendant"></span>
+                        <a>搜索结果</a>
+                        <span class="arrow glyphicon glyphicon-chevron-right"></span>
+                    </li>
+                </ul>
+            </div>
             <div class="main_page col-lg-9 col-md-9">
                 <div class="header">
                     <!-- 面包屑导航 -->
@@ -52,7 +60,9 @@
                     @endforelse
                 </ul>
                 <!-- 分页 -->
-                {!! $posts->links() !!}
+                @if($posts->count() >0)
+                    {!! $posts->links() !!}
+                @endif
             </div>
         </div>
     </div>

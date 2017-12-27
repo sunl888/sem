@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Services\Alert;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class PostsController extends Controller
@@ -54,9 +55,13 @@ class PostsController extends Controller
     public function search(Request $request)
     {
         $keywords = $request->get('keywords');
-        $posts = Post::withSimpleSearch($keywords, ['title', 'excerpt'])
-            ->applyFilter(collect(['status' => Post::STATUS_PUBLISH]))
-            ->with('user')
-            ->paginate($this->perPage());
-        return view(config('template.theme_namespace') . '::search', ['posts' => $posts, 'keywords' => $keywords]);    }
+        $posts = collect();
+        if (!is_null($keywords)) {
+            $posts = Post::withSimpleSearch($keywords, ['title', 'excerpt'])
+                ->applyFilter(collect(['status' => Post::STATUS_PUBLISH]))
+                ->with('user')
+                ->paginate($this->perPage())->appends(['keywords' => $keywords]);
+        }
+        return view(THEME_NP . 'search.search', ['posts' => $posts, 'keywords' => $keywords]);
+    }
 }
