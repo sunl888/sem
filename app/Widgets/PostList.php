@@ -41,7 +41,7 @@ class PostList extends AbstractWidget
             $posts = Post::applyFilter(collect([
                 'category_id' => $category->id,
                 'status' => $this->config['status']
-            ]))->paginate($this->config['limit'], $columns = ['*'], $pageName = 'page', $this->config['page']);
+            ]))->paginate($this->config['limit'], ['*'], 'page', $this->config['page']);
         } else {
             $posts = collect();
         }

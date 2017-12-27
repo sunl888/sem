@@ -21,7 +21,7 @@
                 <ul>
                     <li class="active">
                         <span class="pendant"></span>
-                        <a>搜索结果</a>
+                        <a href="#">搜索结果</a>
                         <span class="arrow glyphicon glyphicon-chevron-right"></span>
                     </li>
                 </ul>
