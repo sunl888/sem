@@ -2,7 +2,6 @@
     $count = $banners->count();
 @endphp
 @if($count>0)
-    <!-- 轮播图 -->
     <div class="banner" id="banner">
         @php
             // 当banner小于4个时前端轮播图会出现问题，因此在这里手动复制一个banner
@@ -26,7 +25,7 @@
             // 轮播图
             $(function () {
                 var $banner = $("#banner");
-                if ($banner.children().length == 0)
+                if($banner.children().length == 0)
                     return;
                 $banner.slick({
                     dots: true,

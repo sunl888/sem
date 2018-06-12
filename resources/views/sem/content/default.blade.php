@@ -22,11 +22,6 @@
                 <div class="info">
                     <span>{!! $post->published_at->format('Y-m-d H:m:s')!!}</span>
                     <span>阅读量：{!! $post->views_count !!}</span>
-                    <span class="avatar">
-              上传：
-              <img src="{!! isset($post->user->avatar)?image_url($post->user->avatar):'' !!}" alt="">
-              <span class="uname">{!! isset($post->user->nick_name)?$post->user->nick_name:$post->user->user_name !!}</span>
-            </span>
                 </div>
             </div>
             <div class="body">{!! $post->postContent->content !!}</div>

@@ -17,50 +17,44 @@
     <div class="content_list">
         <div class="news_body">
             <div class="container">
-                <h2 class="title">学院新闻</h2>
-                <!-- 学院新闻 -->
-                <div class="news_main">
+                <div class="news_main col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                    <h2 class="title">学院新闻<span>News</span></h2>
                     @widget('new_img_post', ['category' => '学院新闻', 'view' => 'post_lists.image', 'limit' => 1])
-                    <div class="news_list col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        @widget('post_list', ['category' => '学院新闻', 'view' => 'post_lists.news', 'limit' => 4, 'page'
-                        =>1])
+                    <div class="news_list col-lg-6 col-md-6 hidden-sm hidden-xs">
+                        @widget('post_list', ['category' => '学院新闻', 'view' => 'post_lists.news', 'limit' => 5])
                     </div>
-                    <div class="news_list col-lg-4 col-md-4 col-sm-6 col-xs-12 hidden-sm hidden-xs">
-                        @widget('post_list', ['category' => '学院新闻', 'view' => 'post_lists.news', 'limit' => 4, 'page'
-                        =>2])
-                    </div>
+                </div>
+                <div class="news_list col-lg-4 col-md-4 col-sm-6 hidden-xs">
+                    <h2 class="title">通知公告<span>Notice</span></h2>
+                    @widget('post_list', ['category' => '通知公告', 'view' => 'post_lists.notices', 'limit' => 4])
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- 拆分条 -->
     @include('sem.layouts.particals.splitter')
 
     <!-- 其他列表 -->
-    <div class="other_list">
-        <div class="container">
-            <div class="first_list">
-                <h2 class="title">教学管理</h2>
-                @widget('post_list', ['category' => '教学管理', 'view' => 'post_lists.others', 'limit' => 4, 'page' =>1])
+    <div class="container text_content">
+        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 content_list_box">
+            <div class="content_box">
+                {{--8个党建工作 => 组织建设 新闻--}}
+                @widget('post_list', ['category' => '组织建设', 'view' => 'post_lists.party_building', 'limit' => 8])
             </div>
-            <div class="first_list">
-                <h2 class="title">科学研究</h2>
-                @widget('post_list', ['category' => '科学研究', 'view' => 'post_lists.others', 'limit' => 4, 'page' =>1])
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-6 hidden-xs content_list_box">
+            <div class="content_box">
+                {{--8个教学管理 => 教学动态 新闻--}}
+                @widget('post_list', ['category' => '教学动态', 'view' => 'post_lists.teaching_management', 'limit' => 8])
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 hidden-sm hidden-xs content_list_box">
+            <div class="content_box">
+                {{--8个科学研究 => 科研动态 新闻--}}
+                @widget('post_list', ['category' => '科研动态', 'view' => 'post_lists.scientific_research', 'limit' => 8])
             </div>
         </div>
     </div>
-
-    <!-- 友情链接 -->
-    <div class="friendship_link">
-        <div class="container">
-            <div class="left col-lg-5 col-md-5">
-                <!-- 图片链接 -->
-                @widget('link', ['type' => 'img_link','view' => 'links.img_link'])
-            </div>
-            <div class="right col-lg-6 col-md-6">
-                <h3>常用链接</h3>
-                @widget('link', ['type' => 'friendship_link','view' => 'links.friendship_link'])
-            </div>
-        </div>
-    </div>
+    <!-- 飘 -->
+    @widget('banner', ['type' => 'piao','view' => 'banners.piao'])
 @endsection

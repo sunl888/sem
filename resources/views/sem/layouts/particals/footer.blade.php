@@ -1,19 +1,16 @@
-<!-- 底部 -->
 <div class="footer_nav">
     <div class="container">
-        <ul class="footer_nav_list">
-            @widget('footer_nav_bar', ['view' => 'navigation_bars.footer_nav', 'category' => '学院概况'])
-            @widget('footer_nav_bar', ['view' => 'navigation_bars.footer_nav', 'category' => '中外合作'])
-            @widget('footer_nav_bar', ['view' => 'navigation_bars.footer_nav', 'category' => '党建工作'])
-            @widget('footer_nav_bar', ['view' => 'navigation_bars.footer_nav', 'category' => '教学管理'])
-            @widget('footer_nav_bar', ['view' => 'navigation_bars.footer_nav', 'category' => '科学研究'])
-            @widget('footer_nav_bar', ['view' => 'navigation_bars.footer_nav', 'category' => '学生工作'])
-        </ul>
+        <div class="contact_us col-md-5 col-lg-5">
+            <h3 class="title">联系我们</h3>
+            @widget('link', ['type' => 'contact_us','view' => 'links.link'])
+        </div>
+        <div class="contact_us col-md-5 col-lg-5">
+            <h3 class="title">校内链接</h3>
+            @widget('link', ['type' => 'friendship','view' => 'links.link'])
+        </div>
+        @widget('link', ['type' => 'contact_information', 'view' => 'links.email', 'limit' => 2])
     </div>
 </div>
-<!-- 最底部 -->
 <div class="footer_bottom">
-    <p>{!! setting('copyright') !!}
-        @widget('visitor',['view' => 'visitor.visitor'])
-    </p>
+    <p>{{setting('copyright')}}</p>
 </div>

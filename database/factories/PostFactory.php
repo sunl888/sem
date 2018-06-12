@@ -4,8 +4,6 @@ use Faker\Generator as Faker;
 use App\Models\Post;
 use App\Models\Category;
 
-// todo 正文模版填充
-
 $factory->define(Post::class, function (Faker $faker) {
     static $imagesPath = null, $categories = null;
 
@@ -17,7 +15,7 @@ $factory->define(Post::class, function (Faker $faker) {
     }
 
     if (is_null($categories)) {
-        $categories = Category::all('id', 'type')->keyBy('id')->all();
+        $categories = Category::all(['id', 'type'])->keyBy('id')->all();
     }
     $category = $faker->randomElement($categories);
     $data = [
@@ -35,7 +33,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'created_at' => \Carbon\Carbon::now(),
         'updated_at' => \Carbon\Carbon::now()
     ];
-    if ($category->type == Category::TYPE_PAGE) {
+    if ($category->type == Category::TYPE_PAGE || $category->posts->count() >=5) {
         unset($categories[$category->id]);
     }
     return $data;

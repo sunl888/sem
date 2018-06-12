@@ -1,4 +1,7 @@
 <ul>
+	@php
+        $posts->shift();
+    @endphp
     @forelse($posts as $post)
         <li>
             <a href="{!! $post->getPresenter()->url() !!}">
@@ -14,7 +17,6 @@
         </li>
     @empty
         <div class="no_data">
-            <div class="line"></div>
             <img src="{!! cdn('sem/images/no_data.png') !!}" alt="">
         </div>
     @endforelse

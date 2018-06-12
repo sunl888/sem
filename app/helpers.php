@@ -5,6 +5,40 @@ use App\Repositories\SettingRepository;
 use App\Services\TemplateService;
 use App\Services\HTMLPurifier;
 
+/**
+ * php时间转换
+ * edit by www.jbxue.com
+ */
+if (!function_exists('time_tran')) {
+    function time_tran($the_time)
+    {
+        $now_time = date("Y-m-d H:i:s", time());
+        $now_time = strtotime($now_time);
+        $show_time = strtotime($the_time);
+        $dur = $now_time - $show_time;
+        if ($dur < 0) {
+            return $the_time;
+        } else {
+            if ($dur < 60) {
+                return $dur . '秒前';
+            } else {
+                if ($dur < 3600) {
+                    return floor($dur / 60) . '分钟前';
+                } else {
+                    if ($dur < 86400) {
+                        return floor($dur / 3600) . '小时前';
+                    } else {
+                        if ($dur < 259200) {//3天内
+                            return floor($dur / 86400) . '天前';
+                        } else {
+                            return date("Y-m-d", $show_time);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 if (!function_exists('setting')) {
     /**
      * 获取或设置网站设置
@@ -13,7 +47,8 @@ if (!function_exists('setting')) {
      *      2. setting(['setting_name1' => ['value' => 'value_test', 'is_system' => true]]);
      * @param null $name
      * @param null $default
-     * @return SettingCacheService|\Illuminate\Foundation\Application|mixed|null|void
+     * @return \Illuminate\Foundation\Application|mixed
+     * @throws \Illuminate\Container\EntryNotFoundException
      */
     function setting($name = null, $default = null)
     {
@@ -54,7 +89,7 @@ if (!function_exists('image_url')) {
 
             if (is_array($style)) {
                 $parameters = array_merge($parameters, $style);
-            } elseif(is_string($style)) {
+            } elseif (is_string($style)) {
                 $parameters['p'] = $style;
             }
 
